@@ -10,6 +10,17 @@
 </head>
 <body>
  <h1>Home page</h1><hr>
+ 
+ <form method="post">
+  <label for="selector">Categories</label>
+  <select id="selector" name="categoryId">
+   <c:forEach var="c" items="${categories}">
+    <option value="${c.id}" label="${c.name}"/>
+   </c:forEach>
+  </select>
+  <input type="submit" value="Go"/>
+ </form><hr>
+ 
  <c:forEach var="a" items="${latestArticles}">
   <table border="1">
    <tr>
@@ -23,5 +34,6 @@
   </table>
   <p>${a.content}</p><hr>
  </c:forEach>
+ 
 </body>
 </html>
