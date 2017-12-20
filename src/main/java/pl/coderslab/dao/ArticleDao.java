@@ -25,6 +25,10 @@ public class ArticleDao {
 		return em.createQuery("SELECT a FROM Article a").getResultList();
 	}
 
+	public List<Article> findLatest(int top) {
+		return em.createQuery("SELECT a FROM Article a ORDER BY a.created").setMaxResults(top).getResultList();
+	}
+
 	public Article findById(int id) {
 		return em.find(Article.class, id);
 	}
