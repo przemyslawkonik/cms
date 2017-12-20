@@ -28,8 +28,8 @@ public class Category {
 	private String description;
 
 	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
-	@JoinTable(joinColumns = { @JoinColumn(name = "article_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "category_id") })
+	@JoinTable(joinColumns = { @JoinColumn(name = "category_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "article_id") })
 	private List<Article> articles;
 
 	public Category() {

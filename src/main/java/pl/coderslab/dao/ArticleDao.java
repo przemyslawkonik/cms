@@ -29,6 +29,11 @@ public class ArticleDao {
 		return em.createQuery("SELECT a FROM Article a ORDER BY a.created").setMaxResults(top).getResultList();
 	}
 
+	public List<Article> findByCategoryId(int id) {
+		return em.createQuery("SELECT a FROM Article a JOIN a.categories c WHERE c.id=:categoryId")
+				.setParameter("categoryId", id).getResultList();
+	}
+
 	public Article findById(int id) {
 		return em.find(Article.class, id);
 	}
