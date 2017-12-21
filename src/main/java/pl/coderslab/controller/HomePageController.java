@@ -35,7 +35,7 @@ public class HomePageController {
 	public String showCategory(Model m, @RequestParam int categoryId) {
 		m.addAttribute("category", categoryDao.findById(categoryId));
 		m.addAttribute("categoryArticles", articleDao.findByCategoryId(categoryId));
-		return "category";
+		return "/category/category";
 	}
 
 }

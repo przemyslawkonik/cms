@@ -25,13 +25,13 @@ public class CategoryController {
 	@GetMapping("")
 	public String show(Model m) {
 		m.addAttribute("categories", categoryDao.findAll());
-		return "categories";
+		return "/category/categories";
 	}
 
 	@GetMapping("/add")
 	public String add(Model m) {
 		m.addAttribute("category", new Category());
-		return "addCategory";
+		return "/category/addCategory";
 	}
 
 	@PostMapping("/add")
@@ -49,7 +49,7 @@ public class CategoryController {
 	@GetMapping("/edit/{id}")
 	public String edit(Model m, @PathVariable int id) {
 		m.addAttribute("category", categoryDao.findById(id));
-		return "addCategory";
+		return "/category/addCategory";
 	}
 
 	@PostMapping("/edit/{id}")
