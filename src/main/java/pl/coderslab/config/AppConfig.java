@@ -16,7 +16,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import pl.coderslab.converter.ArticleConverter;
 import pl.coderslab.converter.AuthorConverter;
+import pl.coderslab.converter.CategoryConverter;
 
 @Configuration
 @EnableWebMvc
@@ -51,6 +53,16 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		return new AuthorConverter();
 	}
 
+	@Bean
+	public CategoryConverter getCategoryConverter() {
+		return new CategoryConverter();
+	}
+
+	@Bean
+	public ArticleConverter getArticleConverter() {
+		return new ArticleConverter();
+	}
+
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
@@ -59,6 +71,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
 		registry.addConverter(getAuthorConverter());
+		registry.addConverter(getCategoryConverter());
+		registry.addConverter(getArticleConverter());
 	}
 
 }
