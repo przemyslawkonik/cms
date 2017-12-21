@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import pl.coderslab.dao.AuthorDao;
 import pl.coderslab.entity.Author;
-import pl.coderslab.entity.Category;
 
 @Controller
 @RequestMapping("/authors")
@@ -31,7 +30,7 @@ public class AuthorController {
 
 	@GetMapping("/add")
 	public String add(Model m) {
-		m.addAttribute("author", new Category());
+		m.addAttribute("author", new Author());
 		return "/author/addAuthor";
 	}
 
