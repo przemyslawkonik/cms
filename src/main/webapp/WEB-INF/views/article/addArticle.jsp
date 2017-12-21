@@ -19,6 +19,10 @@
   <form:select path="author">
    <form:options items="${authors}" itemValue="id" itemLabel="fullName"/>
   </form:select><br>
+  <span>Category</span><br>
+  <form:select path="categories" multiple="true">
+   <form:options items="${categories}" itemValue="id" itemLabel="name"/>
+  </form:select><br>
   <span>Content</span><br>
   <form:textarea path="content"/>
   <input type="submit"/>

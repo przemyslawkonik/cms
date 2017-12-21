@@ -31,6 +31,12 @@
     <td><a href="${pageContext.request.contextPath}/articles/delete/${a.id}">Delete</a></td>
    </tr>
   </table>
+  <div>
+   <span>Categories: </span>
+   <c:forEach var="c" items="${a.categories}">
+    <span>${c.name} </span>
+   </c:forEach>
+  </div><br>
   <p>${a.content}</p><hr>
  </c:forEach>
  <a href="${pageContext.request.contextPath}/articles/add">Add new article</a>

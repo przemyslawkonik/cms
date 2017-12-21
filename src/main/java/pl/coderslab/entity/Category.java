@@ -27,7 +27,7 @@ public class Category {
 	@Column(nullable = true)
 	private String description;
 
-	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+	@ManyToMany(cascade = { CascadeType.MERGE })
 	@JoinTable(joinColumns = { @JoinColumn(name = "category_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "article_id") })
 	private List<Article> articles;

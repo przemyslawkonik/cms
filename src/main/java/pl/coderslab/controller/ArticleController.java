@@ -13,19 +13,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import pl.coderslab.dao.ArticleDao;
 import pl.coderslab.dao.AuthorDao;
+import pl.coderslab.dao.CategoryDao;
 import pl.coderslab.entity.Article;
 import pl.coderslab.entity.Author;
+import pl.coderslab.entity.Category;
 
 @Controller
 @RequestMapping("/articles")
 public class ArticleController {
 	private ArticleDao articleDao;
 	private AuthorDao authorDao;
+	private CategoryDao categoryDao;
 
 	@Autowired
-	public ArticleController(ArticleDao articleDao, AuthorDao authorDao) {
+	public ArticleController(ArticleDao articleDao, AuthorDao authorDao, CategoryDao categoryDao) {
 		this.articleDao = articleDao;
 		this.authorDao = authorDao;
+		this.categoryDao = categoryDao;
 	}
 
 	@GetMapping("")
@@ -67,6 +71,11 @@ public class ArticleController {
 	@ModelAttribute("authors")
 	public List<Author> getAuthors() {
 		return authorDao.findAll();
+	}
+
+	@ModelAttribute("categories")
+	public List<Category> getCategories() {
+		return categoryDao.findAll();
 	}
 
 }

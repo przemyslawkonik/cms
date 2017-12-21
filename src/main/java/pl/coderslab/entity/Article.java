@@ -31,7 +31,7 @@ public class Article {
 	@OneToOne
 	private Author author;
 
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "articles", cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "articles", cascade = { CascadeType.MERGE })
 	private List<Category> categories;
 
 	private String content;
