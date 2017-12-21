@@ -31,7 +31,7 @@
     <td><a href="${pageContext.request.contextPath}/articles/delete/${a.id}">Delete</a></td>
    </tr>
   </table>
-  <p>${a.content}</p>
+  <p>${a.content}</p><hr>
  </c:forEach>
  <a href="${pageContext.request.contextPath}/articles/add">Add new article</a>
  

@@ -1,5 +1,7 @@
 package pl.coderslab.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,16 +12,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import pl.coderslab.dao.ArticleDao;
+import pl.coderslab.dao.AuthorDao;
 import pl.coderslab.entity.Article;
+import pl.coderslab.entity.Author;
 
 @Controller
 @RequestMapping("/articles")
 public class ArticleController {
 	private ArticleDao articleDao;
+	private AuthorDao authorDao;
 
 	@Autowired
-	public ArticleController(ArticleDao articleDao) {
+	public ArticleController(ArticleDao articleDao, AuthorDao authorDao) {
 		this.articleDao = articleDao;
+		this.authorDao = authorDao;
 	}
 
 	@GetMapping("")
@@ -56,6 +62,11 @@ public class ArticleController {
 	public String edit(@ModelAttribute Article article) {
 		articleDao.update(article);
 		return "redirect:/articles";
+	}
+
+	@ModelAttribute("authors")
+	public List<Author> getAuthors() {
+		return authorDao.findAll();
 	}
 
 }
