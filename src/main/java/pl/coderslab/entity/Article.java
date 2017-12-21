@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -31,7 +33,9 @@ public class Article {
 	@OneToOne
 	private Author author;
 
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "articles", cascade = { CascadeType.MERGE })
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
+	@JoinTable(joinColumns = { @JoinColumn(name = "article_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "category_id") })
 	private List<Category> categories;
 
 	private String content;

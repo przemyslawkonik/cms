@@ -6,11 +6,10 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -27,9 +26,7 @@ public class Category {
 	@Column(nullable = true)
 	private String description;
 
-	@ManyToMany(cascade = { CascadeType.MERGE })
-	@JoinTable(joinColumns = { @JoinColumn(name = "category_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "article_id") })
+	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
 	private List<Article> articles;
 
 	public Category() {
