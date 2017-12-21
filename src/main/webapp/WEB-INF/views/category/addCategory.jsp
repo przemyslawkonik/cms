@@ -10,11 +10,15 @@
 </head>
 <body>
  <h1>Add/Edit category</h1>
+ <%@include file="/WEB-INF/views/header.jsp"%>
+ <hr>
+ 
  <form:form method="post" modelAttribute="category">
   <span>Name</span><form:input path="name"/><br>
   <span>Description</span><br>
   <form:textarea path="description"/><br>
   <input type="submit"/>
  </form:form>
+
 </body>
 </html>

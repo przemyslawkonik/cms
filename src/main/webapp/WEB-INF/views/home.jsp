@@ -9,10 +9,12 @@
 <title>Home page</title>
 </head>
 <body>
- <h1>Home page</h1><hr>
+ <h1>Home page</h1>
+ <%@include file="/WEB-INF/views/header.jsp"%>
+ <hr>
  
  <form method="post">
-  <label for="selector">Categories</label>
+  <label for="selector">Show articles in</label>
   <select id="selector" name="categoryId">
    <c:forEach var="c" items="${categories}">
     <option value="${c.id}" label="${c.name}"/>

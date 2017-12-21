@@ -9,18 +9,21 @@
 <title>Categories</title>
 </head>
 <body>
- <h1>Categories</h1><hr>
-  <table border="1">
+ <h1>Categories</h1>
+ <%@include file="/WEB-INF/views/header.jsp"%>
+ <hr>
+ 
+ <table border="1">
+  <tr>
+   <th scope="col">Name</th>
+   <th scope="col">Description</th>
+  </tr>
+  <c:forEach var="c" items="${categories}">
    <tr>
-    <th scope="col">Name</th>
-    <th scope="col">Description</th>
+    <td>${c.name}</td>
+    <td>${c.description}</td>
    </tr>
-   <c:forEach var="c" items="${categories}">
-    <tr>
-     <td>${c.name}</td>
-     <td>${c.description}</td>
-    </tr>
-   </c:forEach>
-  </table>
+  </c:forEach>
+ </table>
 </body>
 </html>
