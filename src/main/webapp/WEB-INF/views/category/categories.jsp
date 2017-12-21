@@ -17,13 +17,18 @@
   <tr>
    <th scope="col">Name</th>
    <th scope="col">Description</th>
+   <th colspan="2">Actions</th>
   </tr>
   <c:forEach var="c" items="${categories}">
    <tr>
     <td>${c.name}</td>
     <td>${c.description}</td>
+    <td><a href="${pageContext.request.contextPath}/categories/edit/${c.id}">Edit</a></td>
+    <td><a href="${pageContext.request.contextPath}/categories/delete/${c.id}">Delete</a></td>
    </tr>
   </c:forEach>
  </table>
+ <a href="${pageContext.request.contextPath}/categories/add">Add new category</a>
+ 
 </body>
 </html>
