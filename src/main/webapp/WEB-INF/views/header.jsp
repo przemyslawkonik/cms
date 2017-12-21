@@ -9,5 +9,6 @@
 <body>
  <a href="${pageContext.request.contextPath}/">Home</a>
  <a href="${pageContext.request.contextPath}/categories">Categories</a>
+ <a href="${pageContext.request.contextPath}/authors">Authors</a>
 </body>
 </html>
