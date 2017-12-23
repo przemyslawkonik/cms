@@ -11,5 +11,6 @@
  <a href="${pageContext.request.contextPath}/categories">Categories</a>
  <a href="${pageContext.request.contextPath}/authors">Authors</a>
  <a href="${pageContext.request.contextPath}/articles">Articles</a>
+ <a href="${pageContext.request.contextPath}/drafts">Drafts</a>
 </body>
 </html>
