@@ -26,12 +26,21 @@ public class ArticleDao {
 	}
 
 	public List<Article> findLatest(int top) {
-		return em.createQuery("SELECT a FROM Article a ORDER BY a.created").setMaxResults(top).getResultList();
+		return em.createQuery("SELECT a FROM Article a WHERE a.draft=0 ORDER BY a.created").setMaxResults(top)
+				.getResultList();
 	}
 
 	public List<Article> findByCategoryId(int id) {
 		return em.createQuery("SELECT a FROM Article a JOIN a.categories c WHERE c.id=:categoryId")
 				.setParameter("categoryId", id).getResultList();
+	}
+
+	public List<Article> findAllDrafts() {
+		return em.createQuery("SELECT a FROM Article a WHERE a.draft=1").getResultList();
+	}
+
+	public List<Article> findAllArticles() {
+		return em.createQuery("SELECT a FROM Article a WHERE a.draft=0").getResultList();
 	}
 
 	public Article findById(int id) {

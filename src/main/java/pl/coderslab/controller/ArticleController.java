@@ -2,12 +2,11 @@ package pl.coderslab.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +19,7 @@ import pl.coderslab.dao.CategoryDao;
 import pl.coderslab.entity.Article;
 import pl.coderslab.entity.Author;
 import pl.coderslab.entity.Category;
+import pl.coderslab.validator.ArticleValidationGroup;
 
 @Controller
 @RequestMapping("/articles")
@@ -37,7 +37,7 @@ public class ArticleController {
 
 	@GetMapping("")
 	public String show(Model m) {
-		m.addAttribute("articles", articleDao.findAll());
+		m.addAttribute("articles", articleDao.findAllArticles());
 		return "/article/articles";
 	}
 
@@ -48,7 +48,7 @@ public class ArticleController {
 	}
 
 	@PostMapping("/add")
-	public String add(@Valid @ModelAttribute Article article, BindingResult br) {
+	public String add(@Validated(ArticleValidationGroup.class) @ModelAttribute Article article, BindingResult br) {
 		if (br.hasErrors()) {
 			return "/article/addArticle";
 		}
@@ -69,7 +69,7 @@ public class ArticleController {
 	}
 
 	@PostMapping("/edit/{id}")
-	public String edit(@Valid @ModelAttribute Article article, BindingResult br) {
+	public String edit(@Validated(ArticleValidationGroup.class) @ModelAttribute Article article, BindingResult br) {
 		if (br.hasErrors()) {
 			return "/article/addArticle";
 		}

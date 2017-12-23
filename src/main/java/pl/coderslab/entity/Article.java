@@ -22,7 +22,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import pl.coderslab.validator.ArticleValidationGroup;
 import pl.coderslab.validator.Content;
+import pl.coderslab.validator.DraftValidationGroup;
 
 @Entity
 @Table(name = "article")
@@ -32,20 +34,20 @@ public class Article {
 	private int id;
 
 	@Size(max = 200)
-	@NotEmpty
+	@NotEmpty(groups = { ArticleValidationGroup.class, DraftValidationGroup.class })
 	private String title;
 
 	@OneToOne
 	private Author author;
 
-	@NotEmpty
+	@NotEmpty(groups = ArticleValidationGroup.class)
 	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
 	@JoinTable(joinColumns = { @JoinColumn(name = "article_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "category_id") })
 	private List<Category> categories;
 
-	@Content(minLength = 500)
-	@NotEmpty
+	@Content(minLength = 50, groups = { ArticleValidationGroup.class, DraftValidationGroup.class })
+	@NotEmpty(groups = { ArticleValidationGroup.class, DraftValidationGroup.class })
 	@Column(columnDefinition = "TEXT")
 	private String content;
 
@@ -54,6 +56,8 @@ public class Article {
 
 	@UpdateTimestamp
 	private LocalDateTime updated;
+
+	private boolean draft;
 
 	public Article() {
 		categories = new ArrayList<>();
@@ -134,6 +138,14 @@ public class Article {
 
 	public void setUpdated(LocalDateTime updated) {
 		this.updated = updated;
+	}
+
+	public boolean isDraft() {
+		return draft;
+	}
+
+	public void setDraft(boolean draft) {
+		this.draft = draft;
 	}
 
 }
