@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name = "author")
 public class Author {
@@ -19,8 +21,10 @@ public class Author {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	@NotEmpty
 	private String firstName;
 
+	@NotEmpty
 	private String lastName;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "author", cascade = { CascadeType.MERGE, CascadeType.REMOVE })

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,9 +15,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "article")
@@ -27,17 +28,21 @@ public class Article {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(length = 200)
+	@Size(max = 200)
+	@NotEmpty
 	private String title;
 
 	@OneToOne
 	private Author author;
 
+	@NotEmpty
 	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
 	@JoinTable(joinColumns = { @JoinColumn(name = "article_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "category_id") })
 	private List<Category> categories;
 
+	@Size(min = 500)
+	@NotEmpty
 	private String content;
 
 	@CreationTimestamp
