@@ -14,8 +14,8 @@
  <hr>
  
  <form:form method="post" modelAttribute="author">
-  <span>First name</span><form:input path="firstName"/><br>
-  <span>Last name</span><form:input path="lastName"/><br>
+  <form:input path="firstName" placeholder="First name"/><form:errors path="firstName"/><br>
+  <form:input path="lastName" placeholder="Last name"/><form:errors path="lastName"/><br>
   <input type="submit"/>
  </form:form>
 

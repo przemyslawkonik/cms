@@ -14,9 +14,8 @@
  <hr>
  
  <form:form method="post" modelAttribute="category">
-  <span>Name</span><form:input path="name"/><br>
-  <span>Description</span><br>
-  <form:textarea path="description"/><br>
+  <form:input path="name" placeholder="Name"/><form:errors path="name"/><br>
+  <form:textarea path="description" placeholder="Description..."/><br>
   <input type="submit"/>
  </form:form>
 
