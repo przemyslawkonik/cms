@@ -34,19 +34,6 @@ public class Author {
 		articles = new ArrayList<>();
 	}
 
-	public Author(String firstName, String lastName, List<Article> articles) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.articles = articles;
-	}
-
-	public Author(int id, String firstName, String lastName, List<Article> articles) {
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.articles = articles;
-	}
-
 	public int getId() {
 		return id;
 	}

@@ -37,19 +37,6 @@ public class Category {
 		articles = new ArrayList<>();
 	}
 
-	public Category(String name, String description, List<Article> articles) {
-		this.name = name;
-		this.description = description;
-		this.articles = articles;
-	}
-
-	public Category(int id, String name, String description, List<Article> articles) {
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.articles = articles;
-	}
-
 	public int getId() {
 		return id;
 	}

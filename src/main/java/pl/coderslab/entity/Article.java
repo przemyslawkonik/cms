@@ -63,27 +63,6 @@ public class Article {
 		categories = new ArrayList<>();
 	}
 
-	public Article(String title, Author author, List<Category> categories, String content, LocalDateTime created,
-			LocalDateTime updated) {
-		this.title = title;
-		this.author = author;
-		this.categories = categories;
-		this.content = content;
-		this.created = created;
-		this.updated = updated;
-	}
-
-	public Article(int id, String title, Author author, List<Category> categories, String content,
-			LocalDateTime created, LocalDateTime updated) {
-		this.id = id;
-		this.title = title;
-		this.author = author;
-		this.categories = categories;
-		this.content = content;
-		this.created = created;
-		this.updated = updated;
-	}
-
 	public int getId() {
 		return id;
 	}
