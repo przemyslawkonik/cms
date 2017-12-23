@@ -22,6 +22,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import pl.coderslab.validator.Content;
+
 @Entity
 @Table(name = "article")
 public class Article {
@@ -42,7 +44,7 @@ public class Article {
 			@JoinColumn(name = "category_id") })
 	private List<Category> categories;
 
-	@Size(min = 500)
+	@Content(minLength = 500)
 	@NotEmpty
 	@Column(columnDefinition = "TEXT")
 	private String content;
