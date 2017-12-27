@@ -14,24 +14,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import pl.coderslab.dao.ArticleDao;
-import pl.coderslab.dao.AuthorDao;
 import pl.coderslab.dao.CategoryDao;
 import pl.coderslab.entity.Article;
 import pl.coderslab.entity.Author;
 import pl.coderslab.entity.Category;
+import pl.coderslab.repository.AuthorRepository;
 import pl.coderslab.validator.ArticleValidationGroup;
 
 @Controller
 @RequestMapping("/articles")
 public class ArticleController {
 	private ArticleDao articleDao;
-	private AuthorDao authorDao;
+	private AuthorRepository authRep;
 	private CategoryDao categoryDao;
 
 	@Autowired
-	public ArticleController(ArticleDao articleDao, AuthorDao authorDao, CategoryDao categoryDao) {
+	public ArticleController(ArticleDao articleDao, AuthorRepository authRep, CategoryDao categoryDao) {
 		this.articleDao = articleDao;
-		this.authorDao = authorDao;
+		this.authRep = authRep;
 		this.categoryDao = categoryDao;
 	}
 
@@ -79,7 +79,7 @@ public class ArticleController {
 
 	@ModelAttribute("authors")
 	public List<Author> getAuthors() {
-		return authorDao.findAll();
+		return authRep.findAll();
 	}
 
 	@ModelAttribute("categories")

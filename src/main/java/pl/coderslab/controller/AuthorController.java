@@ -12,22 +12,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import pl.coderslab.dao.AuthorDao;
 import pl.coderslab.entity.Author;
+import pl.coderslab.repository.AuthorRepository;
 
 @Controller
 @RequestMapping("/authors")
 public class AuthorController {
-	private AuthorDao authorDao;
+	private AuthorRepository authRep;
 
 	@Autowired
-	public AuthorController(AuthorDao authorDao) {
-		this.authorDao = authorDao;
+	public AuthorController(AuthorRepository authRep) {
+		this.authRep = authRep;
 	}
 
 	@GetMapping("")
 	public String show(Model m) {
-		m.addAttribute("authors", authorDao.findAll());
+		m.addAttribute("authors", authRep.findAll());
 		return "/author/authors";
 	}
 
@@ -42,19 +42,19 @@ public class AuthorController {
 		if (br.hasErrors()) {
 			return "/author/addAuthor";
 		}
-		authorDao.save(author);
+		authRep.save(author);
 		return "redirect:/authors";
 	}
 
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable int id) {
-		authorDao.remove(id);
+		authRep.delete(id);
 		return "redirect:/authors";
 	}
 
 	@GetMapping("/edit/{id}")
 	public String edit(Model m, @PathVariable int id) {
-		m.addAttribute("author", authorDao.findById(id));
+		m.addAttribute("author", authRep.findOne(id));
 		return "/author/addAuthor";
 	}
 
@@ -63,7 +63,7 @@ public class AuthorController {
 		if (br.hasErrors()) {
 			return "/author/addAuthor";
 		}
-		authorDao.update(author);
+		authRep.save(author);
 		return "redirect:/authors";
 	}
 
