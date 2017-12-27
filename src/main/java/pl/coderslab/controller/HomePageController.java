@@ -8,33 +8,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import pl.coderslab.dao.ArticleDao;
-import pl.coderslab.dao.CategoryDao;
+import pl.coderslab.repository.ArticleRepository;
+import pl.coderslab.repository.CategoryRepository;
 
 @Controller
 @RequestMapping("")
 public class HomePageController {
-	private ArticleDao articleDao;
-	private CategoryDao categoryDao;
+	private ArticleRepository artRep;
+	private CategoryRepository catRep;
 	private final int top = 5;
 
 	@Autowired
-	public HomePageController(ArticleDao articleDao, CategoryDao categoryDao) {
-		this.articleDao = articleDao;
-		this.categoryDao = categoryDao;
+	public HomePageController(CategoryRepository catRep, ArticleRepository artRep) {
+		this.catRep = catRep;
+		this.artRep = artRep;
 	}
 
 	@GetMapping("")
 	public String showLatestArticles(Model m) {
-		m.addAttribute("latestArticles", articleDao.findLatest(top));
-		m.addAttribute("categories", categoryDao.findAll());
+		m.addAttribute("latestArticles", artRep.findLatest(top));
+		m.addAttribute("categories", catRep.findAll());
 		return "home";
 	}
 
 	@PostMapping("")
 	public String showCategory(Model m, @RequestParam int categoryId) {
-		m.addAttribute("category", categoryDao.findById(categoryId));
-		m.addAttribute("categoryArticles", articleDao.findByCategoryId(categoryId));
+		m.addAttribute("category", catRep.findOne(categoryId));
+		m.addAttribute("categoryArticles", artRep.findByCategoriesId(categoryId));
 		return "/category/category";
 	}
 

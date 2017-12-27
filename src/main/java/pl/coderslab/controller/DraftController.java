@@ -11,50 +11,51 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import pl.coderslab.dao.ArticleDao;
 import pl.coderslab.entity.Article;
+import pl.coderslab.repository.ArticleRepository;
 import pl.coderslab.validator.DraftValidationGroup;
 
 @Controller
 @RequestMapping("/drafts")
 public class DraftController {
-	private ArticleDao articleDao;
+	private ArticleRepository artRep;
 
 	@Autowired
-	public DraftController(ArticleDao articleDao) {
-		this.articleDao = articleDao;
+	public DraftController(ArticleRepository artRep) {
+		this.artRep = artRep;
 	}
 
 	@GetMapping("")
 	public String show(Model m) {
-		m.addAttribute("drafts", articleDao.findAllDrafts());
+		m.addAttribute("drafts", artRep.findByDraftEquals(true));
 		return "article/drafts";
 	}
 
 	@GetMapping("/add")
 	public String add(Model m) {
-		m.addAttribute("draft", new Article());
+		m.addAttribute("article", new Article());
 		return "/article/addDraft";
 	}
 
 	@PostMapping("/add")
-	public String add(@Validated(DraftValidationGroup.class) @ModelAttribute Article draft, BindingResult br) {
+	public String add(@Validated(DraftValidationGroup.class) @ModelAttribute Article article, BindingResult br) {
 		if (br.hasErrors()) {
 			return "/article/addDraft";
 		}
-		articleDao.save(draft);
+		article.setDraft(true);
+		artRep.save(article);
 		return "redirect:/drafts";
 	}
 
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable int id) {
-		articleDao.remove(id);
+		artRep.delete(id);
 		return "redirect:/drafts";
 	}
 
 	@GetMapping("/edit/{id}")
 	public String edit(Model m, @PathVariable int id) {
-		m.addAttribute("draft", articleDao.findById(id));
+		m.addAttribute("draft", artRep.findOne(id));
 		return "/article/addDraft";
 	}
 
@@ -63,7 +64,7 @@ public class DraftController {
 		if (br.hasErrors()) {
 			return "/article/addDraft";
 		}
-		articleDao.update(draft);
+		artRep.save(draft);
 		return "redirect:/drafts";
 	}
 

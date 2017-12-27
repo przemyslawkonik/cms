@@ -13,31 +13,31 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import pl.coderslab.dao.ArticleDao;
-import pl.coderslab.dao.CategoryDao;
 import pl.coderslab.entity.Article;
 import pl.coderslab.entity.Author;
 import pl.coderslab.entity.Category;
+import pl.coderslab.repository.ArticleRepository;
 import pl.coderslab.repository.AuthorRepository;
+import pl.coderslab.repository.CategoryRepository;
 import pl.coderslab.validator.ArticleValidationGroup;
 
 @Controller
 @RequestMapping("/articles")
 public class ArticleController {
-	private ArticleDao articleDao;
+	private ArticleRepository artRep;
 	private AuthorRepository authRep;
-	private CategoryDao categoryDao;
+	private CategoryRepository catRep;
 
 	@Autowired
-	public ArticleController(ArticleDao articleDao, AuthorRepository authRep, CategoryDao categoryDao) {
-		this.articleDao = articleDao;
+	public ArticleController(AuthorRepository authRep, CategoryRepository catRep, ArticleRepository artRep) {
 		this.authRep = authRep;
-		this.categoryDao = categoryDao;
+		this.catRep = catRep;
+		this.artRep = artRep;
 	}
 
 	@GetMapping("")
 	public String show(Model m) {
-		m.addAttribute("articles", articleDao.findAllArticles());
+		m.addAttribute("articles", artRep.findByDraftEquals(false));
 		return "/article/articles";
 	}
 
@@ -52,19 +52,19 @@ public class ArticleController {
 		if (br.hasErrors()) {
 			return "/article/addArticle";
 		}
-		articleDao.save(article);
+		artRep.save(article);
 		return "redirect:/articles";
 	}
 
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable int id) {
-		articleDao.remove(id);
+		artRep.delete(id);
 		return "redirect:/articles";
 	}
 
 	@GetMapping("/edit/{id}")
 	public String edit(Model m, @PathVariable int id) {
-		m.addAttribute("article", articleDao.findById(id));
+		m.addAttribute("article", artRep.findOne(id));
 		return "/article/addArticle";
 	}
 
@@ -73,7 +73,7 @@ public class ArticleController {
 		if (br.hasErrors()) {
 			return "/article/addArticle";
 		}
-		articleDao.update(article);
+		artRep.save(article);
 		return "redirect:/articles";
 	}
 
@@ -84,7 +84,7 @@ public class ArticleController {
 
 	@ModelAttribute("categories")
 	public List<Category> getCategories() {
-		return categoryDao.findAll();
+		return catRep.findAll();
 	}
 
 }

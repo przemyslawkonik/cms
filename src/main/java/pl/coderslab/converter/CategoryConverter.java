@@ -3,16 +3,16 @@ package pl.coderslab.converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 
-import pl.coderslab.dao.CategoryDao;
 import pl.coderslab.entity.Category;
+import pl.coderslab.repository.CategoryRepository;
 
 public class CategoryConverter implements Converter<String, Category> {
 
 	@Autowired
-	private CategoryDao categoryDao;
+	private CategoryRepository cr;
 
 	@Override
 	public Category convert(String source) {
-		return categoryDao.findById(Integer.parseInt(source));
+		return cr.findOne(Integer.parseInt(source));
 	}
 }

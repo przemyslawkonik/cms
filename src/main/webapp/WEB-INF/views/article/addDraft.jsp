@@ -13,11 +13,10 @@
  <%@include file="/WEB-INF/views/header.jsp"%>
  <hr>
  
- <form:form method="post" modelAttribute="draft">
+ <form:form method="post" modelAttribute="article">
   <form:input path="title" placeholder="Title"/><form:errors path="title"/><br>
   <label for="content">Content</label><br>
   <form:textarea path="content" id="content"/><form:errors path="content"/><br>
-  <form:input path="draft" type="hidden" value="true"/>
   <input type="submit"/>
  </form:form>
 
