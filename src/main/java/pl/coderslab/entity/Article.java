@@ -14,7 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -37,7 +37,7 @@ public class Article {
 	@NotEmpty(groups = { ArticleValidationGroup.class, DraftValidationGroup.class })
 	private String title;
 
-	@OneToOne
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Author author;
 
 	@NotEmpty(groups = ArticleValidationGroup.class)

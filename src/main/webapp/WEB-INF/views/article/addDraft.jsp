@@ -17,6 +17,7 @@
   <form:input path="title" placeholder="Title"/><form:errors path="title"/><br>
   <label for="content">Content</label><br>
   <form:textarea path="content" id="content"/><form:errors path="content"/><br>
+  <form:input path="draft" type="hidden" value="true"/>
   <input type="submit"/>
  </form:form>
 

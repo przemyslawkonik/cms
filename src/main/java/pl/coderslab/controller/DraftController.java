@@ -42,7 +42,6 @@ public class DraftController {
 		if (br.hasErrors()) {
 			return "/article/addDraft";
 		}
-		article.setDraft(true);
 		artRep.save(article);
 		return "redirect:/drafts";
 	}
@@ -55,16 +54,16 @@ public class DraftController {
 
 	@GetMapping("/edit/{id}")
 	public String edit(Model m, @PathVariable int id) {
-		m.addAttribute("draft", artRep.findOne(id));
+		m.addAttribute("article", artRep.findOne(id));
 		return "/article/addDraft";
 	}
 
 	@PostMapping("/edit/{id}")
-	public String edit(@Validated(DraftValidationGroup.class) @ModelAttribute Article draft, BindingResult br) {
+	public String edit(@Validated(DraftValidationGroup.class) @ModelAttribute Article article, BindingResult br) {
 		if (br.hasErrors()) {
 			return "/article/addDraft";
 		}
-		artRep.save(draft);
+		artRep.save(article);
 		return "redirect:/drafts";
 	}
 

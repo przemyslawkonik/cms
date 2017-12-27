@@ -3,7 +3,6 @@ package pl.coderslab.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,7 +26,7 @@ public class Author {
 	@NotEmpty
 	private String lastName;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "author", cascade = { CascadeType.MERGE, CascadeType.REMOVE })
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
 	private List<Article> articles;
 
 	public Author() {

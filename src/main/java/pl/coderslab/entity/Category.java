@@ -3,7 +3,6 @@ package pl.coderslab.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,7 +29,7 @@ public class Category {
 	@Column(nullable = true)
 	private String description;
 
-	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
+	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
 	private List<Article> articles;
 
 	public Category() {
